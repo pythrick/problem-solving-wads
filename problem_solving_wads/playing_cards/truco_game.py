@@ -6,15 +6,19 @@ from problem_solving_wads.playing_cards.play import Play
 from problem_solving_wads.playing_cards.player import Player
 from problem_solving_wads.playing_cards.round import Round
 
+PLAYERS_NUMBER = 2
+
 
 def start_game():
-    player_a_name = input("What's your name? ")
-    player_a = Player(player_a_name)
-    player_b_name = input("What's your opponent's name? ")
-    player_b = Player(player_b_name)
+    players = []
+    for i in range(PLAYERS_NUMBER):
+        name = input(f"What's the name of the {i+1}# player? \n")
+        player = Player(name)
+        players.append(player)
     time.sleep(0.2)
 
-    game = Game([player_a, player_b])
+    print("Starting game...")
+    game = Game(players)
 
     while not game.winner:
         print("Starting a new match...\n")
@@ -58,7 +62,7 @@ def start_game():
 
         time.sleep(0.3)
         for player in match.players:
-            print(f"Player {player} current score: {player.score}\n")
+            print(f"Player {player} current score: {player.score}")
 
         print("-" * 50)
         game.matches.append(match)
